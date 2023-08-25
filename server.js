@@ -2,10 +2,7 @@ const app = require("./app");
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb+srv://Maks:maks2002@cluster01.smaassk.mongodb.net/", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.DB_HOST)
   .then(() => {
     console.log("Database connection successful");
     app.listen(3000, () => {
