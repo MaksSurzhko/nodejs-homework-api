@@ -5,18 +5,33 @@ const update = async (req, res) => {
   const { contactId } = req.params;
   const body = req.body;
   const { error } = schema.validate(body);
-  if (error) {
-    error.status = 400;
-    throw error;
+  
+  if (!body.name && !body.email && !body.phone) {
+    const missingFieldsError = new Error("missing fields");
+    missingFieldsError.status = 400;
+    throw missingFieldsError;
   }
+
+  if (error) {
+    const missingField = error.details[0].context.label;
+    const errorMessage = `Missing required ${missingField} field`;
+    const customError = new Error(errorMessage);
+    customError.status = 400;
+    throw customError;
+  }
+  
+  
   const updatedContact = await Contact.findByIdAndUpdate(contactId, body, {
     new: true,
   });
+ 
   if (!updatedContact) {
-    const error = new Error("Not found");
-    error.status = 404;
-    throw error;
+    const notFoundError = new Error("Not found");
+    notFoundError.status = 404;
+    throw notFoundError;
   }
+ 
+ 
   res.json(
     updatedContact,
   );
