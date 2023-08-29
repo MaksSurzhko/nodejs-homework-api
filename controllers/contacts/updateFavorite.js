@@ -14,7 +14,7 @@ const updateFavorite = async (req, res) => {
     new: true,
   });
   if (!updatedContact) {
-    const error = new Error("Not found!");
+    const error = new Error("Not found");
     error.status = 404;
     throw error;
   }
