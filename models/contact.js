@@ -1,10 +1,3 @@
-// const { model } = require("mongoose");
-// const contactSchema = require("../schemas/schemaMongoose");
-// const Contact = model("contact", contactSchema);
-
-// module.exports = Contact;
-
-
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 const errorMongooseHandler = require("../helpers/errorMongooseHandler");
