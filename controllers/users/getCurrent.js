@@ -1,7 +1,7 @@
 const getCurrent = async (req, res) => {
   const { email, subscription } = req.user;
-    res.json(
-        { user: { email, subscription }, }
+    res.json({ email, subscription }
+        // { user: { email, subscription }, }
       );
 };
 
