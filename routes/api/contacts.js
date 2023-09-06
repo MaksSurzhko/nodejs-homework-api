@@ -9,7 +9,7 @@ const auth = require("../../middlewares/auth");
 router.get("/", auth, errorHandler(controller.getAll));
 
 router.get("/:contactId",
-  auth,
+auth,
 isValidId,
 errorHandler(controller.getById));
 
