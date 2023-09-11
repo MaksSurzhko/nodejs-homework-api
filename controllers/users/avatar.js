@@ -17,9 +17,7 @@ const avatar = async (req, res) => {
     await fs.rename(tempUpload, resultUpload);
     const urlAvatar = path.join("avatars", imageName);
     await User.findByIdAndUpdate(_id, { urlAvatar });
-    res.json({
-      urlAvatar,
-    });
+    res.json({ urlAvatar });
   } catch (error) {
     await fs.unlink();
     throw error;

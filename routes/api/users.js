@@ -11,7 +11,6 @@ router.post("/login", errorHandler(controller.login));
 router.get("/current", auth, errorHandler(controller.getCurrent));
 router.post("/logout", auth, errorHandler(controller.logout));
 router.patch("/", auth, errorHandler(controller.updateSubscription));
-router.patch("/avatars", auth, upload.single("avatar"), errorHandler(controller.avatar)
-);
+router.patch("/avatars", auth, upload.single("avatar"), errorHandler(controller.avatar));
 
 module.exports = router;
