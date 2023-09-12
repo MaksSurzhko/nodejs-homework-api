@@ -8,7 +8,7 @@
 
 // const { BASE_URL } = process.env;
 // const register = async (req, res) => {
-//   const { email, password, name } = req.body;
+//   const { email, password, name} = req.body;
 //   const { error } = registerSchema.validate(req.body);
 //   if (error) {
 //     error.status = 400;
@@ -49,13 +49,13 @@
 const { registerSchema } = require("../../models/user");
 const HttpError = require("../../helpers/HttpError");
 const { User } = require("../../models/user");
-const { nanoid } = import("nanoid");
+const { nanoid } = require("nanoid");
 const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
 const sendEmail = require("../../helpers/sendEmail");
 const { BASE_URL } = process.env;
 const register = async (req, res) => {
-  const { email, password, name } = req.body;
+  const { email, password } = req.body;
   const { error } = registerSchema.validate(req.body);
   if (error) {
     error.status = 400;
@@ -71,7 +71,6 @@ const register = async (req, res) => {
   const newUser = await User.create({
     email,
     password: hashPassword,
-    name,
     urlAvatar,
     verificationToken,
   });
@@ -85,15 +84,11 @@ const register = async (req, res) => {
   sendEmail(mail);
 
   res.status(201).json({
-    status: "success",
-    code: 201,
-    data: {
       user: {
         email,
         subscription: newUser.subscription,
       },
-    },
-  });
-};
+  })
+}
 
 module.exports = register;
