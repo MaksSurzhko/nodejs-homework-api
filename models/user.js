@@ -19,7 +19,7 @@
 //       default: "starter",
 //     },
 //     token: String,
-//     urlAvatar: String,
+//     avatarURL: String,
 //   },
 //   { versionKey: false, timestamps: true }
 // );
@@ -71,7 +71,7 @@ const userSchema = new Schema(
       default: "starter",
     },
     token: String,
-    urlAvatar: String,
+    avatarURL: String,
     verify: {
       type: Boolean,
       default: false,

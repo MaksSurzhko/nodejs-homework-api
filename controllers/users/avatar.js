@@ -15,9 +15,9 @@ const avatar = async (req, res) => {
     await image.writeAsync(tempUpload);
     const resultUpload = path.join(avatarsDir, imageName);
     await fs.rename(tempUpload, resultUpload);
-    const urlAvatar = path.join("avatars", imageName);
-    await User.findByIdAndUpdate(_id, { urlAvatar });
-    res.json({ urlAvatar });
+    const avatarURL = path.join("avatars", imageName);
+    await User.findByIdAndUpdate(_id, { avatarURL });
+    res.json({ avatarURL });
   } catch (error) {
     await fs.unlink();
     throw error;

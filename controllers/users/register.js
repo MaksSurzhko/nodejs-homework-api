@@ -17,13 +17,13 @@ const register = async (req, res) => {
   if (user) {
     throw HttpError(409, "Email in use");
   }
-  const urlAvatar = gravatar.url(email);
+  const avatarURL = gravatar.url(email);
   const hashPassword = await bcrypt.hash(password, 12);
   const verificationToken = nanoid();
   const newUser = await User.create({
     email,
     password: hashPassword,
-    urlAvatar,
+    avatarURL,
     verificationToken,
   });
 
