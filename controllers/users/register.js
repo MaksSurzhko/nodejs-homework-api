@@ -7,7 +7,7 @@ const gravatar = require("gravatar");
 const sendEmail = require("../../helpers/sendEmail");
 const { BASE_URL } = process.env;
 const register = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
   const { error } = registerSchema.validate(req.body);
   if (error) {
     error.status = 400;
@@ -21,6 +21,7 @@ const register = async (req, res) => {
   const hashPassword = await bcrypt.hash(password, 12);
   const verificationToken = nanoid();
   const newUser = await User.create({
+    name,
     email,
     password: hashPassword,
     avatarURL,
@@ -30,7 +31,7 @@ const register = async (req, res) => {
   const mail = {
     to: email,
     subject: "Підтвердження реєстрації",
-    html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">Для підтвердження реєстрації перейдіть по посиланню.</a>`,
+    html: `<a target="_blank" href="${BASE_URL}/users/verify/${verificationToken}">Для підтвердження реєстрації перейдіть по посиланню.</a>`,
   };
 
   sendEmail(mail);

@@ -20,6 +20,14 @@
 //     },
 //     token: String,
 //     avatarURL: String,
+//     verify: {
+//       type: Boolean,
+//       default: false,
+//     },
+//     verificationToken: {
+//       type: String,
+//       required: [true, "Verify token is required"],
+//     },
 //   },
 //   { versionKey: false, timestamps: true }
 // );
@@ -40,6 +48,9 @@
 //   subscription: Joi.string().valid("starter", "pro", "business"),
 // });
 
+// const verifyEmailSchema = Joi.object({
+//   email: Joi.string().required(),
+// });
 // const User = model("user", userSchema);
 
 // module.exports = {
@@ -47,8 +58,8 @@
 //   registerSchema,
 //   loginSchema,
 //   subscriptionSchema,
+//   verifyEmailSchema,
 // };
-
 
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");

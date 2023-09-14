@@ -16,13 +16,21 @@ const resendVerifyEmail = async (req, res) => {
   if (!user || !user.verify) {
     HttpError(404, "User not found or not verified.");
   }
+  // if (user.verify) {
+  //   HttpError(400, "Verification has already been passed");
+  // }
+ 
   if (user.verify) {
-    HttpError(400, "Verification has already been passed");
-  }
+   res.status(400).json({
+     message: "Verification has already been passed",
+   });
+     return;
+}
+
   const mail = {
     to: email,
     subject: "Підтвердження реєстрації",
-    html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${user.verificationToken}">Для підтвердження реєстрації перейдіть по посиланню.</a>`,
+    html: `<a target="_blank" href="${BASE_URL}/users/verify/${user.verificationToken}">Для підтвердження реєстрації перейдіть по посиланню.</a>`,
   };
 
   sendEmail(mail);
